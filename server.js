@@ -15,7 +15,30 @@ client.on('error', (error)=>
 async function testRedisConnection () {
     try {
         await client.connect()
-        console.log("Connected to redis")
+        console.log("Connected to redis");
+
+        await client.set("name","himanhsu");
+        const extractValue = await client.get("name");
+        console.log(extractValue);
+
+
+        const deleteCount = await client.del("name");
+        console.log(deleteCount );
+
+        const extractUpdatedValue = await client.get("name");
+        console.log(extractUpdatedValue);
+
+        await client.set("count","100");
+        const incrementCount = await client.incr("count");
+        console.log( incrementCount);
+
+        const decrementCount = await client.decr("count");
+        console.log(decrementCount);
+        
+        
+        
+        
+
     } catch (error) {
         console.log(error);
     }finally {
